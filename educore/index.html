@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EduCore – School Management System</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════
+       LOGIN SCREEN
+  ═══════════════════════════════════════════ -->
+  <div id="loginScreen" class="login-screen">
+    <div class="login-bg"></div>
+    <div class="login-card">
+      <div class="login-logo">
+        <div class="login-logo-icon">🎓</div>
+        <div class="login-logo-text">Edu<span>Core</span></div>
+      </div>
+      <div class="login-title">Welcome back</div>
+      <div class="login-sub">Sign in to your school portal</div>
+
+      <div class="role-tabs" id="roleTabs">
+        <button class="role-tab active" onclick="setRole('admin')">🛡 Admin</button>
+        <button class="role-tab" onclick="setRole('teacher')">📚 Teacher</button>
+        <button class="role-tab" onclick="setRole('student')">🎒 Student</button>
+        <button class="role-tab" onclick="setRole('parent')">👨‍👩‍👦 Parent</button>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Email address</label>
+        <input type="email" class="form-input" id="emailInput" placeholder="you@school.ac.ke">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Password</label>
+        <input type="password" class="form-input" id="pwInput" placeholder="••••••••"
+               onkeydown="if(event.key==='Enter') doLogin()">
+      </div>
+      <button class="btn-primary" onclick="doLogin()">Sign In →</button>
+
+      <div class="demo-accounts">
+        <div class="demo-title">— Quick demo login —</div>
+        <div class="demo-btns">
+          <div class="demo-btn" onclick="quickLogin('admin')">🛡️ Admin</div>
+          <div class="demo-btn" onclick="quickLogin('teacher')">📚 Teacher</div>
+          <div class="demo-btn" onclick="quickLogin('student')">🎒 Student</div>
+          <div class="demo-btn" onclick="quickLogin('parent')">👨‍👩‍👦 Parent</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       MAIN APP SHELL
+  ═══════════════════════════════════════════ -->
+  <div id="appScreen" class="app hidden">
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-logo">
+          <div class="sidebar-logo-icon">🎓</div>
+          <div class="sidebar-logo-text">Edu<span>Core</span></div>
+        </div>
+      </div>
+      <div class="sidebar-user">
+        <div class="sidebar-avatar" id="sidebarAvatar">A</div>
+        <div>
+          <div class="sidebar-user-name" id="sidebarName">Administrator</div>
+          <div class="sidebar-user-role" id="sidebarRole">System Admin</div>
+        </div>
+      </div>
+      <nav class="sidebar-nav" id="sidebarNav"></nav>
+      <div class="sidebar-footer">
+        <div style="padding:8px 10px;font-size:11px;color:rgba(255,255,255,.25);margin-bottom:6px">
+          EduCore v2.1 &bull; Term 1 2026
+        </div>
+        <div class="logout-btn" onclick="doLogout()">🚪 Sign out</div>
+      </div>
+    </div>
+
+    <!-- MAIN CONTENT AREA -->
+    <div class="main">
+      <div class="topbar">
+        <div class="page-title" id="pageTitle">Dashboard</div>
+        <div class="topbar-right">
+          <div class="topbar-search" onclick="openModal('search','Search EduCore')">
+            🔍 Search students, teachers, classes…
+          </div>
+          <div style="display:flex;align-items:center;gap:5px;font-size:12px;color:var(--text2)">
+            <span class="rt-dot"></span> Live
+          </div>
+          <div class="notif-btn" onclick="openModal('notif','Notifications')">
+            🔔<div class="notif-dot" id="notifDot"></div>
+          </div>
+          <div class="avatar" id="topbarAvatar"
+               style="width:34px;height:34px;font-size:13px;cursor:pointer"
+               onclick="openModal('profile','My Profile')"></div>
+        </div>
+      </div>
+      <div class="content" id="mainContent"></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       GLOBAL MODAL
+  ═══════════════════════════════════════════ -->
+  <div class="modal-overlay hidden" id="modal" onclick="if(event.target===this) closeModal()">
+    <div class="modal">
+      <div class="modal-header">
+        <div class="modal-title" id="modalTitle"></div>
+        <button class="modal-close" onclick="closeModal()">✕</button>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/pages.js"></script>
+  <script src="js/modals.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
