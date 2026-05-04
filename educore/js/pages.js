@@ -79,13 +79,7 @@ function teacherDash(el){
     <div class="card">
       <div class="card-header"><div class="card-title">📅 Today's Schedule</div><span style="font-size:12px;color:var(--text3)">Monday, Jan 27</span></div>
       <div style="padding:0 20px">
-        ${[
-          {time:'8:00 AM',cls:'Form 4A – Mathematics',room:'Lab A',type:'In-person'},
-          {time:'9:00 AM',cls:'Form 3B – Mathematics',room:'Room 5',type:'In-person'},
-          {time:'11:30 AM',cls:'Form 4B – Further Math',room:'🎥 Google Meet',type:'Online'},
-          {time:'1:30 PM',cls:'Form 2A – Mathematics',room:'Room 7',type:'In-person'},
-          {time:'2:30 PM',cls:'Form 2B – Mathematics',room:'Room 4',type:'In-person'},
-        ].map(s=>`<div style="display:flex;align-items:center;gap:14px;padding:11px 0;border-bottom:1px solid var(--border)">
+        ${TEACHER_TODAY_SCHEDULE.map(s=>`<div style="display:flex;align-items:center;gap:14px;padding:11px 0;border-bottom:1px solid var(--border)">
           <div style="font-size:12px;color:var(--text3);min-width:76px;font-weight:500">${s.time}</div>
           <div style="flex:1"><div style="font-size:13.5px;font-weight:600;color:var(--navy)">${s.cls}</div>
           <div style="font-size:12px;color:var(--text2)">${s.room}</div></div>
@@ -138,7 +132,7 @@ function studentDash(el){
   <div style="margin-bottom:20px">
     <div style="font-size:14px;font-weight:700;color:var(--navy);margin-bottom:14px">My Subjects</div>
     <div class="grid-3">
-      ${SUBJECTS.slice(0,6).map(s=>{const pct=Math.floor(Math.random()*30+60);return`
+      ${SUBJECTS.slice(0,6).map(s=>{const pct=SUBJECT_PROGRESS.student[s.name]||75;return`
       <div class="subject-card" style="background:${s.bg};border-color:${s.tc}22" onclick="navigate('lessons')">
         <div style="font-size:26px;margin-bottom:8px">${s.ic}</div>
         <div style="font-size:14px;font-weight:700;color:${s.tc}">${s.name}</div>
@@ -154,13 +148,7 @@ function studentDash(el){
     <div class="card">
       <div class="card-header"><div class="card-title">📅 Today's Classes</div><button class="btn btn-outline btn-sm" onclick="navigate('timetable')">Full TT</button></div>
       <div style="padding:0 20px">
-        ${[
-          {time:'8:00',sub:'Mathematics',teacher:'Mr. Ochieng',room:'Lab A',live:false},
-          {time:'9:00',sub:'English',   teacher:'Mrs. Kamau',  room:'Room 12',live:false},
-          {time:'10:30',sub:'Physics',  teacher:'Ms. Nyambura',room:'🎥 Meet',live:true},
-          {time:'11:30',sub:'History',  teacher:'Mr. Otieno',  room:'Room 8',live:false},
-          {time:'1:30',sub:'Biology',   teacher:'Ms. Waweru',  room:'Lab B',live:false},
-        ].map(c=>`<div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border)">
+        ${STUDENT_TODAY_CLASSES.map(c=>`<div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border)">
           <div style="font-size:12px;color:var(--text3);min-width:46px;font-weight:600">${c.time}</div>
           <div style="flex:1"><div style="font-size:13.5px;font-weight:600;color:var(--navy)">${c.sub}</div>
           <div style="font-size:12px;color:var(--text2)">${c.teacher}</div></div>
@@ -204,7 +192,7 @@ function parentDash(el){
     <div class="card">
       <div class="card-header"><div class="card-title">📊 Subject Performance</div></div>
       <div style="padding:0 20px">
-        ${SUBJECTS.map(s=>{const v=Math.floor(Math.random()*28+65);return`
+        ${SUBJECTS.map(s=>{const v=SUBJECT_PROGRESS.parent[s.name]||72;return`
         <div style="padding:10px 0;border-bottom:1px solid var(--border)">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
             <div style="font-size:13px;font-weight:600;color:var(--navy)">${s.ic} ${s.name}</div>
@@ -230,11 +218,7 @@ function parentDash(el){
       <div class="card">
         <div class="card-header"><div class="card-title">💬 Teacher Messages</div></div>
         <div style="padding:0 20px">
-          ${[
-            {t:'Mr. Ochieng',m:'Amara has shown great improvement in calculus this term.',d:'Today'},
-            {t:'Mrs. Kamau',m:'Please ensure the English essay is submitted by Wednesday.',d:'Yesterday'},
-            {t:'Ms. Waweru',m:'Biology practical results: Amara scored 91%. Excellent!',d:'Jan 24'},
-          ].map(x=>`<div style="padding:12px 0;border-bottom:1px solid var(--border)">
+          ${PARENT_TEACHER_MESSAGES.map(x=>`<div style="padding:12px 0;border-bottom:1px solid var(--border)">
             <div style="font-size:12px;font-weight:600;color:var(--accent);margin-bottom:4px">${x.t}</div>
             <div style="font-size:13px;color:var(--text);line-height:1.5">${x.m}</div>
             <div style="font-size:11px;color:var(--text3);margin-top:4px">${x.d}</div>
@@ -386,12 +370,7 @@ function renderParents(el){
   </div>
   <div class="card"><div class="table-wrap"><table>
     <thead><tr><th>Parent</th><th>Child(ren)</th><th>Contact</th><th>Last Login</th><th>Actions</th></tr></thead>
-    <tbody>${[
-      {p:'Mrs. Grace Njeri',  ch:'Amara Njeri (10A)',     ph:'+254 712 000 001',login:'Today'},
-      {p:'Mr. John Otieno',   ch:'Kevin Otieno (10A)',    ph:'+254 712 000 002',login:'Yesterday'},
-      {p:'Ms. Halima Hassan', ch:'Fatuma Hassan (10A)',   ph:'+254 712 000 003',login:'Jan 25'},
-      {p:'Mr. Paul Mwangi',   ch:'Brian Mwangi (10B)',    ph:'+254 712 000 004',login:'Jan 24'},
-    ].map(p=>`<tr>
+    <tbody>${PARENTS.map(p=>`<tr>
       <td style="font-weight:600">${p.p}</td>
       <td>${p.ch}</td>
       <td style="color:var(--text2)">${p.ph}</td>
@@ -504,26 +483,10 @@ function renderAnnouncements(el){
   ${S.role==='admin'||S.role==='teacher'?`
   <button class="btn btn-blue mb20" onclick="openModal('newAnn','Post Announcement')">📢 Post Announcement</button>`:''}
   <div style="display:flex;flex-direction:column;gap:16px">
-    ${[
-      {ic:'📅',bg:'#dbeafe',ti:'End of Term Examinations',
-       body:'Examinations are scheduled for February 14–21, 2026. The full timetable is on Google Classroom. All students must report by 7:30 AM on each exam day. Parents will receive individual timetables via email.',
-       time:'2 hours ago',auth:'Dr. Sarah Wanjiku (Principal)',tgt:'All Students, Staff & Parents',pin:true},
-      {ic:'🏆',bg:'#dcfce7',ti:'National Games Qualification!',
-       body:"Congratulations to our athletics team! We've qualified for the National Schools Games in Mombasa next month. A special assembly will be held this Friday. Well done to all athletes and coaches.",
-       time:'Yesterday 3:15 PM',auth:'Mr. Otieno (PE Department)',tgt:'All Students & Parents',pin:false},
-      {ic:'⚠️',bg:'#fef3c7',ti:'Scheduled System Maintenance',
-       body:'EduCore will be offline Saturday January 29 from 10:00 PM to 2:00 AM for upgrades. Please download any materials you need before then. We apologise for any inconvenience.',
-       time:'2 days ago',auth:'ICT Department',tgt:'All Users',pin:false},
-      {ic:'📚',bg:'#ede9fe',ti:'New Library Resources Available',
-       body:'The school library has received new textbooks and reference materials for all KCSE subjects. Form 3 and 4 students are strongly encouraged to make use of these resources ahead of mid-term exams.',
-       time:'3 days ago',auth:'Mrs. Kamau (Head of Academics)',tgt:'Form 3 & 4 Students',pin:false},
-      {ic:'🎓',bg:'#ccfbf1',ti:'University Open Days – January 2026',
-       body:'Several top universities have upcoming open days. Please check the school notice board or ask your class teacher for details. All Form 4 students are encouraged to attend.',
-       time:'4 days ago',auth:'Career Guidance Office',tgt:'Form 4 Students & Parents',pin:false},
-    ].map(a=>`<div class="card" style="padding:20px 22px;${a.pin?'border-left:4px solid var(--accent)':''}">
+    ${ANNOUNCEMENTS.map(a=>`<div class="card" style="padding:20px 22px;${a.pin?'border-left:4px solid var(--accent)':''}">
       ${a.pin?`<div style="font-size:11px;color:var(--accent);font-weight:700;margin-bottom:10px">📌 PINNED</div>`:''}
       <div style="display:flex;gap:14px;align-items:flex-start">
-        <div style="width:44px;height:44px;border-radius:12px;background:${a.bg};display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">${a.ic}</div>
+        <div style="width:44px;height:44px;border-radius:12px;background:${a.bg};display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">${lucideIcon(a.ic,20)}</div>
         <div style="flex:1">
           <div style="font-size:15px;font-weight:700;color:var(--navy);margin-bottom:6px">${a.ti}</div>
           <div style="font-size:13.5px;color:var(--text2);line-height:1.6;margin-bottom:12px">${a.body}</div>
@@ -758,8 +721,9 @@ function renderExams(el){
     </div>
     <div class="table-wrap"><table>
       <thead><tr><th>Student</th>${EXAMS.filter(e=>e.status==='done').map(e=>`<th>${e.sub}</th>`).join('')}<th>Avg</th><th>Pos.</th></tr></thead>
-      <tbody>${STUDENTS.slice(0,6).map((s,i)=>{
-        const scores=EXAMS.filter(e=>e.status==='done').map(()=>Math.floor(Math.random()*30+60));
+      <tbody>${EXAM_RESULT_ROWS.map((row,i)=>{
+        const s=STUDENTS.find(x=>x.id===row.studentId);
+        const scores=EXAMS.filter(e=>e.status==='done').map(e=>row[e.sub]||0);
         const avg=Math.round(scores.reduce((a,b)=>a+b,0)/scores.length);
         return`<tr>
           <td><div style="display:flex;align-items:center;gap:8px">${av(s.name,s.color,26,10)}${s.name}</div></td>
@@ -791,7 +755,7 @@ function renderGrades(el){
     <div class="card">
       <div class="card-header"><div class="card-title">📚 Subject Performance</div></div>
       <div style="padding:0 20px">
-        ${SUBJECTS.map(s=>{const v=Math.floor(Math.random()*28+64);return`
+        ${SUBJECTS.map(s=>{const v=SUBJECT_PROGRESS.grades[s.name]||70;return`
         <div style="padding:11px 0;border-bottom:1px solid var(--border)">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
             <div style="font-size:13px;font-weight:600">${s.ic} ${s.name}</div>
@@ -807,9 +771,9 @@ function renderGrades(el){
     <div class="card">
       <div class="card-header"><div class="card-title">🏆 Class Leaderboard</div></div>
       <div style="padding:0 20px">
-        ${STUDENTS.sort((a,b)=>b.avg-a.avg).map((s,i)=>`
+        ${[...STUDENTS].sort((a,b)=>b.avg-a.avg).map((s,i)=>`
         <div style="display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--border)">
-          <div style="width:26px;height:26px;border-radius:50%;background:${i===0?'#f59e0b':i===1?'#94a3b8':i===2?'#cd7c2f':'var(--surface3)'};display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:${i<3?'white':'var(--text3)';flex-shrink:0}">${i+1}</div>
+          <div style="width:26px;height:26px;border-radius:50%;background:${i===0?'#f59e0b':i===1?'#94a3b8':i===2?'#cd7c2f':'var(--surface3)'};display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:${i<3?'white':'var(--text3)'};flex-shrink:0">${i+1}</div>
           ${av(s.name,s.color,30,11)}
           <div style="flex:1"><div style="font-size:13px;font-weight:600;color:var(--navy)">${s.name}</div>
           <div style="font-size:11px;color:var(--text3)">${s.cls}</div></div>
@@ -832,7 +796,7 @@ function renderAnalytics(el){
     <div class="card">
       <div class="card-header"><div class="card-title">📊 Performance by Subject</div></div>
       <div style="padding:0 20px">
-        ${SUBJECTS.map(s=>{const v=Math.floor(Math.random()*25+60);return`
+        ${SUBJECTS.map(s=>{const v=SUBJECT_PROGRESS.analytics[s.name]||68;return`
         <div style="padding:10px 0;border-bottom:1px solid var(--border)">
           <div style="display:flex;justify-content:space-between;margin-bottom:6px">
             <div style="font-size:13px;font-weight:600">${s.ic} ${s.name}</div>
@@ -846,13 +810,13 @@ function renderAnalytics(el){
       <div class="card-header"><div class="card-title">📈 Attendance Trend (Jan)</div></div>
       <div class="card-body">
         <div style="display:flex;gap:4px;align-items:flex-end;height:120px">
-          ${Array.from({length:21},(_,i)=>{const v=Math.floor(Math.random()*12+84);return`
+          ${ANALYTICS_ATTENDANCE_TREND.map((v,i)=>`
           <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px">
             <div style="flex:1;width:100%;background:var(--surface3);border-radius:4px;display:flex;align-items:flex-end;overflow:hidden">
               <div style="width:100%;height:${v}%;background:${v>90?'var(--accent)':'var(--amber)'};border-radius:4px"></div>
             </div>
             <div style="font-size:9px;color:var(--text3)">${i+6}</div>
-          </div>`}).join('')}
+          </div>`).join('')}
         </div>
         <div style="display:flex;gap:14px;margin-top:14px;font-size:12px">
           <span style="color:var(--text3)">● <span style="color:var(--accent)">≥90%</span> Present</span>
@@ -877,13 +841,13 @@ function renderAnalytics(el){
       <div class="card-header"><div class="card-title">🏫 Class Comparison</div></div>
       <div class="table-wrap"><table>
         <thead><tr><th>Class</th><th>Students</th><th>Avg</th><th>Att.</th><th>Rank</th></tr></thead>
-        <tbody>${['4A','4B','3A','3B','2A','2B'].map((cls,i)=>{const avg=Math.floor(Math.random()*15+70),att=Math.floor(Math.random()*10+86);return`<tr>
-          <td style="font-weight:600">Form ${cls}</td>
-          <td>${Math.floor(Math.random()*8+28)}</td>
-          <td style="font-weight:700;color:${avg>80?'var(--green)':'var(--amber)'}">${avg}%</td>
-          <td>${att}%</td>
-          <td>${badge('#'+(i+1),'bg-blue')}</td>
-        </tr>`;}).join('')}</tbody>
+        <tbody>${CLASS_COMPARISON.map(c=>`<tr>
+          <td style="font-weight:600">Form ${c.cls}</td>
+          <td>${c.students}</td>
+          <td style="font-weight:700;color:${c.avg>80?'var(--green)':'var(--amber)'}">${c.avg}%</td>
+          <td>${c.att}%</td>
+          <td>${badge('#'+c.rank,'bg-blue')}</td>
+        </tr>`).join('')}</tbody>
       </table></div>
     </div>
   </div>`;

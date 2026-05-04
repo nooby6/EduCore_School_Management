@@ -118,6 +118,20 @@ function annItem(ic, bg, title, desc, time) {
     <div style="font-size:11px;color:var(--text3);margin-top:5px">${time}</div></div></div>`;
 }
 
+function lucideIcon(name, size = 20) {
+  const icons = {
+    Calendar: '<rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>',
+    Trophy: '<path d="M8 21h8"/><path d="M12 17v4"/><path d="M7 4h10v3a5 5 0 0 1-10 0V4Z"/><path d="M5 7H4a2 2 0 0 0 0 4h2"/><path d="M19 7h1a2 2 0 0 1 0 4h-2"/>',
+    TriangleAlert: '<path d="m21.73 18-8-14a2 2 0 0 0-3.46 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>',
+    BookOpen: '<path d="M12 7v14"/><path d="M3 18a5 5 0 0 1 5-5h4"/><path d="M21 18a5 5 0 0 0-5-5h-4"/><path d="M3 6v12"/><path d="M21 6v12"/>',
+    GraduationCap: '<path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/><path d="M22 10v6"/>',
+  };
+
+  if (!icons[name]) return name;
+
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${icons[name]}</svg>`;
+}
+
 // ─── Attendance ───────────────────────────────────────────────────────────────
 function setAtt(i, st, btn) {
   S.attData[i] = st;

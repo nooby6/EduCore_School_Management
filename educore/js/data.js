@@ -211,6 +211,150 @@ const CHAT_MSGS = [
   { from: 'me',    msg: "Perfect, thank you Mr. Ochieng! I'll go through them this evening.", time: '10:32 AM' },
 ];
 
+// ─── Additional Demo Datasets ───────────────────────────────────────────────
+const PARENTS = [
+  { p: 'Mrs. Grace Njeri',  ch: 'Amara Njeri (10A)',     ph: '+254 712 000 001', login: 'Today' },
+  { p: 'Mr. John Otieno',   ch: 'Kevin Otieno (10A)',    ph: '+254 712 000 002', login: 'Yesterday' },
+  { p: 'Ms. Halima Hassan', ch: 'Fatuma Hassan (10A)',   ph: '+254 712 000 003', login: 'Jan 25' },
+  { p: 'Mr. Paul Mwangi',   ch: 'Brian Mwangi (10B)',    ph: '+254 712 000 004', login: 'Jan 24' },
+  { p: 'Mrs. Lydia Achieng', ch: 'Cynthia Achieng (10B)', ph: '+254 712 000 005', login: 'Jan 24' },
+  { p: 'Mr. Simon Kipchoge', ch: 'Daniel Kipchoge (10A)', ph: '+254 712 000 006', login: 'Jan 23' },
+];
+
+const TEACHER_TODAY_SCHEDULE = [
+  { time: '8:00 AM', cls: 'Form 4A - Mathematics', room: 'Lab A', type: 'In-person' },
+  { time: '9:00 AM', cls: 'Form 3B - Mathematics', room: 'Room 5', type: 'In-person' },
+  { time: '11:30 AM', cls: 'Form 4B - Further Math', room: 'Google Meet', type: 'Online' },
+  { time: '1:30 PM', cls: 'Form 2A - Mathematics', room: 'Room 7', type: 'In-person' },
+  { time: '2:30 PM', cls: 'Form 2B - Mathematics', room: 'Room 4', type: 'In-person' },
+];
+
+const STUDENT_TODAY_CLASSES = [
+  { time: '8:00', sub: 'Mathematics', teacher: 'Mr. Ochieng', room: 'Lab A', live: false },
+  { time: '9:00', sub: 'English', teacher: 'Mrs. Kamau', room: 'Room 12', live: false },
+  { time: '10:30', sub: 'Physics', teacher: 'Ms. Nyambura', room: 'Google Meet', live: true },
+  { time: '11:30', sub: 'History', teacher: 'Mr. Otieno', room: 'Room 8', live: false },
+  { time: '1:30', sub: 'Biology', teacher: 'Ms. Waweru', room: 'Lab B', live: false },
+];
+
+const SUBJECT_PROGRESS = {
+  student: {
+    Mathematics: 88,
+    Biology: 84,
+    English: 82,
+    Chemistry: 76,
+    History: 79,
+    Physics: 81,
+    'Computer Sc.': 90,
+  },
+  parent: {
+    Mathematics: 88,
+    Biology: 84,
+    English: 82,
+    Chemistry: 76,
+    History: 79,
+    Physics: 81,
+    'Computer Sc.': 90,
+  },
+  grades: {
+    Mathematics: 81,
+    Biology: 77,
+    English: 74,
+    Chemistry: 72,
+    History: 69,
+    Physics: 75,
+    'Computer Sc.': 86,
+  },
+  analytics: {
+    Mathematics: 78,
+    Biology: 73,
+    English: 76,
+    Chemistry: 71,
+    History: 68,
+    Physics: 74,
+    'Computer Sc.': 82,
+  },
+};
+
+const PARENT_TEACHER_MESSAGES = [
+  { t: 'Mr. Ochieng', m: 'Amara has shown great improvement in calculus this term.', d: 'Today' },
+  { t: 'Mrs. Kamau', m: 'Please ensure the English essay is submitted by Wednesday.', d: 'Yesterday' },
+  { t: 'Ms. Waweru', m: 'Biology practical results: Amara scored 91%. Excellent!', d: 'Jan 24' },
+];
+
+const ANNOUNCEMENTS = [
+  {
+    ic: 'Calendar',
+    bg: '#dbeafe',
+    ti: 'End of Term Examinations',
+    body: 'Examinations are scheduled for February 14-21, 2026. The full timetable is on Google Classroom. All students must report by 7:30 AM on each exam day. Parents will receive individual timetables via email.',
+    time: '2 hours ago',
+    auth: 'Dr. Sarah Wanjiku (Principal)',
+    tgt: 'All Students, Staff & Parents',
+    pin: true,
+  },
+  {
+    ic: 'Trophy',
+    bg: '#dcfce7',
+    ti: 'National Games Qualification!',
+    body: "Congratulations to our athletics team! We have qualified for the National Schools Games in Mombasa next month. A special assembly will be held this Friday. Well done to all athletes and coaches.",
+    time: 'Yesterday 3:15 PM',
+    auth: 'Mr. Otieno (PE Department)',
+    tgt: 'All Students & Parents',
+    pin: false,
+  },
+  {
+    ic: 'TriangleAlert',
+    bg: '#fef3c7',
+    ti: 'Scheduled System Maintenance',
+    body: 'EduCore will be offline Saturday January 29 from 10:00 PM to 2:00 AM for upgrades. Please download any materials you need before then. We apologize for any inconvenience.',
+    time: '2 days ago',
+    auth: 'ICT Department',
+    tgt: 'All Users',
+    pin: false,
+  },
+  {
+    ic: 'BookOpen',
+    bg: '#ede9fe',
+    ti: 'New Library Resources Available',
+    body: 'The school library has received new textbooks and reference materials for all KCSE subjects. Form 3 and Form 4 students are strongly encouraged to make use of these resources ahead of mid-term exams.',
+    time: '3 days ago',
+    auth: 'Mrs. Kamau (Head of Academics)',
+    tgt: 'Form 3 & Form 4 Students',
+    pin: false,
+  },
+  {
+    ic: 'GraduationCap',
+    bg: '#ccfbf1',
+    ti: 'University Open Days - January 2026',
+    body: 'Several top universities have upcoming open days. Please check the school notice board or ask your class teacher for details. All Form 4 students are encouraged to attend.',
+    time: '4 days ago',
+    auth: 'Career Guidance Office',
+    tgt: 'Form 4 Students & Parents',
+    pin: false,
+  },
+];
+
+const EXAM_RESULT_ROWS = [
+  { studentId: 'G10/005', Chemistry: 92, Mathematics: 95 },
+  { studentId: 'G10/004', Chemistry: 88, Mathematics: 91 },
+  { studentId: 'G10/001', Chemistry: 82, Mathematics: 87 },
+  { studentId: 'G10/007', Chemistry: 80, Mathematics: 84 },
+  { studentId: 'G10/002', Chemistry: 76, Mathematics: 79 },
+  { studentId: 'G10/006', Chemistry: 72, Mathematics: 74 },
+];
+
+const ANALYTICS_ATTENDANCE_TREND = [89, 91, 90, 92, 88, 94, 93, 91, 90, 89, 92, 93, 94, 90, 88, 91, 93, 92, 90, 89, 91];
+
+const CLASS_COMPARISON = [
+  { cls: '4A', students: 34, avg: 82, att: 94, rank: 1 },
+  { cls: '4B', students: 32, avg: 79, att: 92, rank: 2 },
+  { cls: '3A', students: 31, avg: 77, att: 91, rank: 3 },
+  { cls: '3B', students: 30, avg: 74, att: 89, rank: 4 },
+  { cls: '2A', students: 36, avg: 72, att: 88, rank: 5 },
+  { cls: '2B', students: 35, avg: 70, att: 87, rank: 6 },
+];
+
 // ─── Page Titles ──────────────────────────────────────────────────────────────
 const PAGE_TITLES = {
   dashboard:     'Dashboard',
